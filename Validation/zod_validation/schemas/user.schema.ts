@@ -7,7 +7,14 @@ export const userSchema = z.object({
 
   email: z
     .string()
-    .email("Invalid email address"),
+    .email("Invalid email address")
+    // .transform((val) => val.toLowerCase()),
+    .refine(
+      (val) => val === val.toLowerCase(),
+      {
+        message: "Email must be in lowercase letters only",
+      }
+    ),
 
   password: z
     .string()
